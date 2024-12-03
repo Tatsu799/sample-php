@@ -1,63 +1,85 @@
 <?php
 
-//POST
-// api.php
 header('Content-Type: application/json; charset=UTF-8');
+// // リクエストメソッドを判定
+$method = $_SERVER['REQUEST_METHOD'];
 
-// POSTデータの取得
-$name = $_POST['name'] ?? null;
-$email = $_POST['email'] ?? null;
 
-// データがない場合のエラーレスポンス
-if (!$name || !$email) {
+if ($method === 'POST') {
+  //POST
+  // api.php
+  // header('Content-Type: application/json; charset=UTF-8');
+  
+  // POSTデータの取得
+  // $name = $_POST['name'] ?? null;
+  // $email = $_POST['email'] ?? null;
+  $name = 'Ken';
+  $email = 'ken@example.com';
+  
+  // データがない場合のエラーレスポンス
+  // if (!$name || !$email) {
+  //     echo json_encode([
+  //         'status' => 'error',
+  //         'message' => '必要なデータが不足しています。',
+  //     ]);
+  //     exit;
+  // }
+  
+  // 正常なレスポンスを返す
+  $response = [
+      'status' => 'success POST',
+      'data' => [
+          'name' => $name,
+          'email' => $email,
+          'timestamp' => date('Y-m-d H:i:s'),
+      ],
+  ];
+  
+  echo json_encode($response);
+
+} elseif ($method === 'GET') {
+  //GET
+  // api.php
+  // header('Content-Type: application/json; charset=UTF-8');
+  
+  // GETデータの取得
+  // $name = $_GET['name'] ?? null;
+  // $email = $_GET['email'] ?? null;
+  $name = 'Tom';
+  $email = 'tom@example.com';
+  
+  // データが不足している場合のエラーレスポンス
+  // if (!$name || !$email) {
+  //     echo json_encode([
+  //         'status' => 'error',
+  //         'message' => '必要なデータが不足しています。',
+  //     ]);
+  //     exit;
+  // }
+  
+  // 正常なレスポンスを返す
+  $response = [
+      'status' => 'success GET',
+      'data' => [
+          'name' => $name,
+          'email' => $email,
+          'timestamp' => date('Y-m-d H:i:s'),
+      ],
+  ];
+  
+  echo json_encode($response);
+
+} else {
+  if (!$name || !$email) {
     echo json_encode([
         'status' => 'error',
         'message' => '必要なデータが不足しています。',
     ]);
     exit;
 }
-
-// 正常なレスポンスを返す
-$response = [
-    'status' => 'success',
-    'data' => [
-        'name' => $name,
-        'email' => $email,
-        'timestamp' => date('Y-m-d H:i:s'),
-    ],
-];
-
-echo json_encode($response);
-
-
-//GET
-// api.php
-header('Content-Type: application/json; charset=UTF-8');
-
-// GETデータの取得
-$name = $_GET['name'] ?? null;
-$email = $_GET['email'] ?? null;
-
-// データが不足している場合のエラーレスポンス
-if (!$name || !$email) {
-    echo json_encode([
-        'status' => 'error',
-        'message' => '必要なデータが不足しています。',
-    ]);
-    exit;
 }
 
-// 正常なレスポンスを返す
-$response = [
-    'status' => 'success',
-    'data' => [
-        'name' => $name,
-        'email' => $email,
-        'timestamp' => date('Y-m-d H:i:s'),
-    ],
-];
 
-echo json_encode($response);
 
 
 //参考
